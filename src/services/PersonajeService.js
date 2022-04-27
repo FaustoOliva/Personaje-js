@@ -30,7 +30,7 @@ export class PersonajeService {
 
     createPersonaje = async (Personaje) => {
         console.log('This is a function on the service');
-
+        console.log(Personaje)
         const pool = await sql.connect(config);
         const response = await pool.request()
             .input('Imagen',sql.VarChar, Personaje?.imagen ?? '')
@@ -46,7 +46,7 @@ export class PersonajeService {
 
     updatePersonajeById = async (id, personaje) => {
         console.log('This is a function on the service');
-
+        console.log(personaje)
         const pool = await sql.connect(config);
         const response = await pool.request()
             .input('id',sql.Int, id)
