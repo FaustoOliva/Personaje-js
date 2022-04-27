@@ -28,16 +28,16 @@ export class PersonajeService {
         return response.recordset[0];
     }
 
-    createPersonaje = async (personaje) => {
+    createPersonaje = async (Personaje) => {
         console.log('This is a function on the service');
 
         const pool = await sql.connect(config);
         const response = await pool.request()
-            .input('Imagen',sql.VarChar, personaje?.imagen ?? '')
-            .input('Nombre',sql.VarChar, personaje?.nombre ?? '')
-            .input('Edad',sql.Bit, personaje?.edad ?? 0)
-            .input('Peso',sql.VarChar, personaje?.peso ?? 0)
-            .input('Historia',sql.VarChar, personaje?.historia ?? '')
+            .input('Imagen',sql.VarChar, Personaje?.imagen ?? '')
+            .input('Nombre',sql.VarChar, Personaje?.nombre ?? '')
+            .input('Edad',sql.VarChar, Personaje?.edad ?? '')
+            .input('Peso',sql.VarChar, Personaje?.peso ?? '')
+            .input('Historia',sql.VarChar, Personaje?.historia ?? '')
             .query(`INSERT INTO ${personajeTabla}(Imagen, Nombre, Edad, Peso, Historia) VALUES (@Imagen, @Nombre, @Edad, @Peso, @Historia)`);
         console.log(response)
 
