@@ -6,7 +6,7 @@ const personajeService = new PersonajeService();
 
 router.get('', async (req, res) => {
   console.log(`This is a get operation`);
-  
+
   const personajes = await personajeService.getPersonaje();
 
   return res.status(200).json(personajes);
@@ -33,7 +33,7 @@ router.put('/:id', async (req, res) => {
   console.log(`Request URL Param: ${req.params.id}`);
   console.log(`This is a put operation`);
 
-  const personaje = await personajeService.updatePersonajeById(req.body);
+  const personaje = await personajeService.updatePersonajeById(req.params.id, req.body);
 
   return res.status(200).json(personaje);
 });

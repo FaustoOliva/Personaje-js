@@ -46,7 +46,7 @@ export class PersonajeService {
 
     updatePersonajeById = async (id, personaje) => {
         console.log('This is a function on the service');
-        console.log(personaje)
+        console.log(id, personaje)
         const pool = await sql.connect(config);
         const response = await pool.request()
             .input('id',sql.Int, id)
