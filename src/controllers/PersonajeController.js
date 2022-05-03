@@ -5,6 +5,8 @@ const router = Router();
 const personajeService = new PersonajeService();
 
 router.get('', async (req, res) => {
+  console.log("nombre: ", req.query.nombre);
+  console.log("edad: ", req.query.edad);
   console.log(`This is a get operation`);
 
   const personajes = await personajeService.getPersonaje();
@@ -17,15 +19,6 @@ router.get('/:id', async (req, res) => {
   console.log(`This is a get operation`);
 
   const personaje = await personajeService.getPersonajeById(req.params.id);
-
-  return res.status(200).json(personaje);
-});
-
-router.get('/getNombre/:nombre', async (req, res) => {
-  console.log(`Request URL Param: ${req.params.nombre}`);
-  console.log(`This is a get operation`);
-
-  const personaje = await personajeService.getPersonajeBynombre(req.params.nombre);
 
   return res.status(200).json(personaje);
 });

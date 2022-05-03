@@ -19,10 +19,12 @@ export class PersonajeService {
     getPersonajeById = async (id) => {
         console.log('This is a function on the service');
 
+        const SP_GETID = "SELECT * from ${personajeTabla} where id = @id"
+
         const pool = await sql.connect(config);
         const response = await pool.request()
             .input('id',sql.Int, id)
-            .query(`SELECT * from ${personajeTabla} where id = @id`);
+            .query(SP_GETID);
         console.log(response)
 
         return response.recordset[0];
@@ -34,6 +36,7 @@ export class PersonajeService {
         const pool = await sql.connect(config);
         const response = await pool.request()
             .input('nombre',sql.Int, nombre)
+            .input('edad',sql.VarChar, edad)
             .query(`SELECT * from ${personajeTabla} where nombre = @nombre`);
         console.log(response)
 
@@ -61,11 +64,10 @@ export class PersonajeService {
         console.log(id, personaje)
         const pool = await sql.connect(config);
         const response = await pool.request()
-            .input('id',sql.Int, id)
             .input('Imagen',sql.VarChar, personaje?.imagen ?? '')
             .input('Nombre',sql.VarChar, personaje?.nombre ?? '')
-            .input('Edad',sql.Bit, personaje?.edad ?? 0)
-            .input('Peso',sql.VarChar, personaje?.peso ?? 0)
+            .input('Edad',sql.VarChar, personaje?.edad ?? '')
+            .input('Peso',sql.VarChar, personaje?.peso ?? '')
             .input('Historia',sql.VarChar, personaje?.historia ?? '')
             .query(`UPDATE ${personajeTabla} SET Imagen = @Imagen, Nombre = @Nombre, Edad = @Edad, Peso = @Peso, Historia = @Historia WHERE id = @id`);
         console.log(response)
