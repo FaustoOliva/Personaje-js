@@ -28,6 +28,18 @@ export class PersonajeService {
         return response.recordset[0];
     }
 
+    getPersonajeBynombre = async (nombre) => {
+        console.log('This is a function on the service');
+
+        const pool = await sql.connect(config);
+        const response = await pool.request()
+            .input('nombre',sql.Int, nombre)
+            .query(`SELECT * from ${personajeTabla} where nombre = @nombre`);
+        console.log(response)
+
+        return response.recordset[0];
+    }
+
     createPersonaje = async (Personaje) => {
         console.log('This is a function on the service');
         console.log(Personaje)
