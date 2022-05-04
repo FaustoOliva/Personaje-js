@@ -9,7 +9,9 @@ router.get('', async (req, res) => {
   console.log("edad: ", req.query.edad);
   console.log(`This is a get operation`);
 
-  const personajes = await personajeService.getPersonaje();
+  const {nombre, edad} = req.query;
+
+  const personajes = await personajeService.getPersonaje(nombre, edad);
 
   return res.status(200).json(personajes);
 });

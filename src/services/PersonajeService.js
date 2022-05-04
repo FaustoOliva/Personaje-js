@@ -6,11 +6,14 @@ const personajeTabla = process.env.DB_TABLA_PERSONAJE;
 
 export class PersonajeService {
 
-    getPersonaje = async () => {
+    getPersonaje = async (nombre, edad) => {
         console.log('This is a function on the service');
 
         const pool = await sql.connect(config);
-        const response = await pool.request().query(`SELECT * from ${personajeTabla}`);
+        const response = await pool.request()
+            .input('Nombre',sql.VarChar, nombre)
+            .input('Edad',sql.VarChar, edad)
+        .query(`SELECT * from ${personajeTabla} where nombre = @nombre and edad = @edad`);
         console.log(response)
 
         return response.recordset;
@@ -19,25 +22,12 @@ export class PersonajeService {
     getPersonajeById = async (id) => {
         console.log('This is a function on the service');
 
-        const SP_GETID = "SELECT * from ${personajeTabla} where id = @id"
+        //const SP_GETID = "SELECT * from ${personajeTabla} where id = @id"
 
         const pool = await sql.connect(config);
         const response = await pool.request()
             .input('id',sql.Int, id)
-            .query(SP_GETID);
-        console.log(response)
-
-        return response.recordset[0];
-    }
-
-    getPersonajeBynombre = async (nombre) => {
-        console.log('This is a function on the service');
-
-        const pool = await sql.connect(config);
-        const response = await pool.request()
-            .input('nombre',sql.Int, nombre)
-            .input('edad',sql.VarChar, edad)
-            .query(`SELECT * from ${personajeTabla} where nombre = @nombre`);
+            .query(`SELECT * from ${personajeTabla} where id = @id`);
         console.log(response)
 
         return response.recordset[0];
