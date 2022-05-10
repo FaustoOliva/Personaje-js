@@ -10,10 +10,24 @@ export class PersonajeService {
         console.log('This is a function on the service');
 
         const pool = await sql.connect(config);
-        const response = await pool.request()
-            .input('Nombre',sql.VarChar, nombre)
-            .input('Edad',sql.VarChar, edad)
-        .query(`SELECT * from ${personajeTabla} where nombre = @nombre and edad = @edad`);
+        if(nombre && edad){
+            const response = await pool.request()
+                .input('Nombre',sql.VarChar, nombre)
+                .input('Edad',sql.VarChar, edad)
+            .query(`SELECT * from ${personajeTabla} where nombre = @nombre and edad = @edad`);
+        }else if(nombre && !edad){
+            const response = await pool.request()
+                .input('Nombre',sql.VarChar, nombre)
+            .query(`SELECT * from ${personajeTabla} where nombre = @nombre`);
+        }else if(!nombre && edad){
+            const response = await pool.request()
+                .input('Edad',sql.VarChar, edad)
+            .query(`SELECT * from ${personajeTabla} where edad = @edad`);
+        }else{
+            const response = await pool.request()
+            .query(`SELECT * from ${personajeTabla}`);
+        }
+
         console.log(response)
 
         return response.recordset;
