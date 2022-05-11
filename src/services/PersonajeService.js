@@ -8,23 +8,24 @@ export class PersonajeService {
 
     getPersonaje = async (nombre, edad) => {
         console.log('This is a function on the service');
-
+        
         const pool = await sql.connect(config);
+        let response;
         if(nombre && edad){
-            const response = await pool.request()
+            response = await pool.request()
                 .input('Nombre',sql.VarChar, nombre)
                 .input('Edad',sql.VarChar, edad)
             .query(`SELECT * from ${personajeTabla} where nombre = @nombre and edad = @edad`);
         }else if(nombre && !edad){
-            const response = await pool.request()
+            response = await pool.request()
                 .input('Nombre',sql.VarChar, nombre)
             .query(`SELECT * from ${personajeTabla} where nombre = @nombre`);
         }else if(!nombre && edad){
-            const response = await pool.request()
+            response = await pool.request()
                 .input('Edad',sql.VarChar, edad)
             .query(`SELECT * from ${personajeTabla} where edad = @edad`);
         }else{
-            const response = await pool.request()
+            response = await pool.request()
             .query(`SELECT * from ${personajeTabla}`);
         }
 
@@ -45,6 +46,19 @@ export class PersonajeService {
         console.log(response)
 
         return response.recordset[0];
+    }
+
+    getListPersonaje = async () => {
+        console.log('This is a function on the service');
+
+        //const SP_GETID = "SELECT * from ${personajeTabla} where id = @id"
+
+        const pool = await sql.connect(config);
+        const response = await pool.request()
+            .query(`SELECT imagen,nombre,id from ${personajeTabla} `);
+        console.log(response)
+
+        return response.recordset;
     }
 
     createPersonaje = async (Personaje) => {
