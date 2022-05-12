@@ -1,18 +1,11 @@
 import { Router } from 'express';
-import { SerieService } from '../services/SeriesService.js';
+import { SerieService } from '../services/SerieService.js';
 import { Authenticate } from '../common/jwt.strategy.js'; 
 
 const router = Router();
 const serieService = new SerieService();
 
-
-router.get('/characters/', Authenticate, async (req, res) => {
-  console.log(`This is a get operation`);
-
-  const personajes = await serieService.getListPersonaje();
-
-  return res.status(200).json(personajes);
-});
+//RevisionIncompleta
 
 router.post('', Authenticate, async (req, res) => {
   console.log(`This is a post operation`);
@@ -26,9 +19,9 @@ router.put('/:id', Authenticate, async (req, res) => {
   console.log(`Request URL Param: ${req.params.id}`);
   console.log(`This is a put operation`);
 
-  const personaje = await serieService.updatePersonajeById(req.params.id, req.body);
+  const serie = await serieService.updateSerieById(req.params.id, req.body);
 
-  return res.status(200).json(personaje);
+  return res.status(200).json(serie);
 });
 
 router.delete('/:id', Authenticate, async (req, res) => {
@@ -40,6 +33,14 @@ router.delete('/:id', Authenticate, async (req, res) => {
   return res.status(200).json(personaje);
 });
 
+router.get('/characters/', Authenticate, async (req, res) => {
+  console.log(`This is a get operation`);
+
+  const personajes = await serieService.getListPersonaje();
+
+  return res.status(200).json(personajes);
+});
+
 router.get('/get', Authenticate, async (req, res) => {
   console.log("nombre: ", req.query.nombre);
   console.log("edad: ", req.query.edad);
@@ -47,7 +48,7 @@ router.get('/get', Authenticate, async (req, res) => {
 
   const {nombre, edad} = req.query;
 
-  const personajes = await SeriesService.getPersonaje(nombre, edad);
+  const personajes = await serieService.getPersonaje(nombre, edad);
 
   return res.status(200).json(personajes);
 });
@@ -56,7 +57,7 @@ router.get('/getById', Authenticate, async (req, res) => {
   console.log(`Request URL Param: ${req.query.id}`);
   console.log(`This is a get operation`);
 
-  const personaje = await SeriesService.getPersonajeById(req.query.id);
+  const personaje = await serieService.getPersonajeById(req.query.id);
 
   return res.status(200).json(personaje);
 });

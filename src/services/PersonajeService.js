@@ -4,6 +4,8 @@ import 'dotenv/config'
 
 const personajeTabla = process.env.DB_TABLA_PERSONAJE;
 
+//Revisado
+
 export class PersonajeService {
 
     getPersonaje = async (nombre, edad) => {
@@ -50,8 +52,6 @@ export class PersonajeService {
 
     getListPersonaje = async () => {
         console.log('This is a function on the service');
-
-        //const SP_GETID = "SELECT * from ${personajeTabla} where id = @id"
 
         const pool = await sql.connect(config);
         const response = await pool.request()

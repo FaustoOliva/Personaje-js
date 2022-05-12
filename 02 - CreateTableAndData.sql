@@ -1,14 +1,6 @@
 USE [Personajedatabase]
 GO
-/****** Object:  User [Personaje]    Script Date: 11/5/2022 10:12:11 ******/
-CREATE USER [Personaje] FOR LOGIN [Personaje] WITH DEFAULT_SCHEMA=[dbo]
-GO
-/****** Object:  User [alumno]    Script Date: 11/5/2022 10:12:11 ******/
-CREATE USER [alumno] FOR LOGIN [alumno] WITH DEFAULT_SCHEMA=[dbo]
-GO
-ALTER ROLE [db_owner] ADD MEMBER [Personaje]
-GO
-/****** Object:  Table [dbo].[Personaje]    Script Date: 11/5/2022 10:12:11 ******/
+/****** Object:  Table [dbo].[Personaje]    Script Date: 11/5/2022 22:34:02 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -23,25 +15,25 @@ CREATE TABLE [dbo].[Personaje](
  CONSTRAINT [PK__Personaj__3213E83FB4D5B95D] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[personajeXseries]    Script Date: 11/5/2022 10:12:11 ******/
+/****** Object:  Table [dbo].[personajeXserie]    Script Date: 11/5/2022 22:34:02 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[personajeXseries](
-	[idpersonajeXseries] [int] IDENTITY(1,1) NOT NULL,
+CREATE TABLE [dbo].[personajeXserie](
+	[idpersonajeXserie] [int] IDENTITY(1,1) NOT NULL,
 	[idP] [int] NULL,
 	[idS] [int] NULL,
  CONSTRAINT [PK_Conexion] PRIMARY KEY CLUSTERED 
 (
-	[idpersonajeXseries] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+	[idpersonajeXserie] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Serie]    Script Date: 11/5/2022 10:12:11 ******/
+/****** Object:  Table [dbo].[Serie]    Script Date: 11/5/2022 22:34:02 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -53,10 +45,9 @@ CREATE TABLE [dbo].[Serie](
 	[fechaDeCreacion] [date] NULL,
 	[calificacion] [int] NULL,
  CONSTRAINT [PK_Serie] PRIMARY KEY CLUSTERED 
- CONSTRAINT [PK_Person] CHECK (calificacion<=5)
 (
 	[id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
 SET IDENTITY_INSERT [dbo].[Personaje] ON 
@@ -67,8 +58,21 @@ SET IDENTITY_INSERT [dbo].[Personaje] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Serie] ON 
 
-INSERT [dbo].[Serie] ([id], [imagen], [titulo], [fechaDeCreacion], [calificacion]) VALUES (1, N'niti', N'niti', N'niti', 3)
+INSERT [dbo].[Serie] ([id], [imagen], [titulo], [fechaDeCreacion], [calificacion]) VALUES (2, N'Hgdf', N'Los Teletunbis', CAST(N'2003-07-06' AS Date), 3)
+INSERT [dbo].[Serie] ([id], [imagen], [titulo], [fechaDeCreacion], [calificacion]) VALUES (5, N'rt', N'Los avengers', CAST(N'2014-05-12' AS Date), 4)
 SET IDENTITY_INSERT [dbo].[Serie] OFF
+GO
+ALTER TABLE [dbo].[personajeXserie]  WITH CHECK ADD  CONSTRAINT [FK_personajeXserie_Personaje] FOREIGN KEY([idP])
+REFERENCES [dbo].[Personaje] ([id])
+GO
+ALTER TABLE [dbo].[personajeXserie] CHECK CONSTRAINT [FK_personajeXserie_Personaje]
+GO
+ALTER TABLE [dbo].[personajeXserie]  WITH CHECK ADD  CONSTRAINT [FK_personajeXserie_Serie] FOREIGN KEY([idS])
+REFERENCES [dbo].[Serie] ([id])
+GO
+ALTER TABLE [dbo].[personajeXserie] CHECK CONSTRAINT [FK_personajeXserie_Serie]
+GO
+ALTER TABLE [dbo].[Serie]  WITH CHECK ADD CHECK  (([calificacion]<=(5) AND [calificacion]>=(0)))
 GO
 USE [master]
 GO
