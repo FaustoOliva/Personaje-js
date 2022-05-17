@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { SerieService } from '../services/SerieService.js';
-import { Authenticate } from '../common/jwt.strategy.js'; 
+import { Authenticate } from '../common/jwt.strategy.js';
 
 const router = Router();
 const serieService = new SerieService();

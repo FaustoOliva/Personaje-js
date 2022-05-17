@@ -5,8 +5,6 @@ import { Authenticate } from '../common/jwt.strategy.js';
 const router = Router();
 const personajeService = new PersonajeService();
 
-//Revisado
-
 router.post('', Authenticate, async (req, res) => {
   console.log(`This is a post operation`);
 
