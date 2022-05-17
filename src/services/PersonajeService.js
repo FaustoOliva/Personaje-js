@@ -82,6 +82,7 @@ export class PersonajeService {
         console.log(id, personaje)
         const pool = await sql.connect(config);
         const response = await pool.request()
+            .input('id',sql.Int, id ?? '')
             .input('Imagen',sql.VarChar, personaje?.imagen ?? '')
             .input('Nombre',sql.VarChar, personaje?.nombre ?? '')
             .input('Edad',sql.VarChar, personaje?.edad ?? '')

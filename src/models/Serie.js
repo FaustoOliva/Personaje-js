@@ -4,5 +4,4 @@ export class Serie {
     titulo;
     fechaDeCreacion;
     calificacion;
-    personajesAsociados;
 }

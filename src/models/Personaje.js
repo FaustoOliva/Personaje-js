@@ -5,5 +5,4 @@ export class Personaje {
     edad;
     peso;
     historia;
-    seriesAsociadas;
 }
