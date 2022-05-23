@@ -60,5 +60,12 @@ router.get('/characters/', Authenticate, async (req, res) => {
   return res.status(200).json(personajes);
 });
 
+router.get('/detalles', Authenticate, async (req, res) => {
+  console.log(`This is a get operation`);
+
+  const personajes = await personajeService.getDetallesPersonaje();
+  
+  return res.status(200).json(personajes);
+});
 
 export default router;

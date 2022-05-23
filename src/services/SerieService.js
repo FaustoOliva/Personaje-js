@@ -3,7 +3,8 @@ import config from '../../db.js'
 import 'dotenv/config'
 
 const serieTabla = process.env.DB_TABLA_SERIE;
-
+const personajeTabla = process.env.DB_TABLA_PERSONAJE;
+const intermedia = process.env.DB_TABLA_PERSOBAJEXSERIE
 //RevisionIncompleta
 
 export class SerieService {
@@ -71,6 +72,22 @@ export class SerieService {
         console.log(response)
     
         return response.recordset[0];
+    }
+
+    getDetallesPersonaje = async () => {
+        console.log('This is a function on the service');
+
+        let response;
+
+        const pool = await sql.connect(config);
+        response = await pool.request()
+            .query(`Select * FROM ${serieTabla}`);
+
+        response = await pool.request()
+            .query(`select p.id, p.imagen, p.nombre, p.peso, p.historia from ${personajeTabla} p inner join ${intermedia} on p.id = ${intermedia}.idP inner join ${serieTabla} on ${serieTabla}.id = ${intermedia}.idS `);
+        console.log(response)
+
+        return response.recordset;
     }
 }
 

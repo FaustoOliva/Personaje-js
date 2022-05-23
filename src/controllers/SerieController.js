@@ -41,14 +41,13 @@ router.get('/movies', Authenticate, async (req, res) => {
   return res.status(200).json(series);
 });
 
-/*router.get('/getById', Authenticate, async (req, res) => {
-  console.log(`Request URL Param: ${req.query.id}`);
+router.get('/detalles', Authenticate, async (req, res) => {
   console.log(`This is a get operation`);
 
-  const personaje = await serieService.getPersonajeById(req.query.id);
-
-  return res.status(200).json(personaje);
-});*/
+  const series = await personajeService.getDetallesSerie();
+  
+  return res.status(200).json(series);
+});
 
 
 export default router;
