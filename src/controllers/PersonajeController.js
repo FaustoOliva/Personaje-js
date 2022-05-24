@@ -61,9 +61,10 @@ router.get('/characters/', Authenticate, async (req, res) => {
 });
 
 router.get('/detalles', Authenticate, async (req, res) => {
+  console.log(`Request URL Param: ${req.query.id}`);
   console.log(`This is a get operation`);
 
-  const personajes = await personajeService.getDetallesPersonaje();
+  const personajes = await personajeService.getDetallesPersonaje(req.query.id);
   
   return res.status(200).json(personajes);
 });

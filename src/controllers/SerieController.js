@@ -5,9 +5,8 @@ import { Authenticate } from '../common/jwt.strategy.js';
 const router = Router();
 const serieService = new SerieService();
 
-//RevisionIncompleta
 
-router.post('/create', Authenticate, async (req, res) => {
+router.post('/create', Authenticate, async (req, res) => {  // CRUD
   console.log(`This is a post operation`);
 
   const serie = await serieService.createSerie(req.body);
@@ -15,7 +14,7 @@ router.post('/create', Authenticate, async (req, res) => {
   return res.status(201).json(serie);
 });
 
-router.put('/:id', Authenticate, async (req, res) => {
+router.put('/:id', Authenticate, async (req, res) => { // CRUD
   console.log(`Request URL Param: ${req.params.id}`);
   console.log(`This is a put operation`);
 
@@ -24,7 +23,7 @@ router.put('/:id', Authenticate, async (req, res) => {
   return res.status(200).json(serie);
 });
 
-router.delete('/:id', Authenticate, async (req, res) => {
+router.delete('/:id', Authenticate, async (req, res) => { // CRUD
   console.log(`Request URL Param: ${req.params.id}`);
   console.log(`This is a delete operation`);
 
@@ -33,7 +32,7 @@ router.delete('/:id', Authenticate, async (req, res) => {
   return res.status(200).json(serie);
 });
 
-router.get('/movies', Authenticate, async (req, res) => {
+router.get('/movies', Authenticate, async (req, res) => { // Punto 7
   console.log(`This is a get operation`);
 
   const series = await serieService.getListSerie();
@@ -41,13 +40,26 @@ router.get('/movies', Authenticate, async (req, res) => {
   return res.status(200).json(series);
 });
 
-router.get('/detalles', Authenticate, async (req, res) => {
+router.get('/detalles', Authenticate, async (req, res) => { // Punto 8
+  console.log(`Request URL Param: ${req.query.id}`);
   console.log(`This is a get operation`);
 
-  const series = await personajeService.getDetallesSerie();
-  
+  const series = await serieService.getDetallesSerie(req.query.id);
+
   return res.status(200).json(series);
 });
 
+router.get('/filtrar', Authenticate, async (req, res) => { // Punto 10
+  console.log(`Titulo:  ${req.query.titulo}`);
+  console.log("Orden: ", req.query.orden);
+  console.log(`This is a get operation`);
+
+  const {titulo, orden} = req.query;
+
+
+  const series = await serieService.getOrdenTitulo(titulo, orden);
+
+  return res.status(200).json(series);
+});
 
 export default router;

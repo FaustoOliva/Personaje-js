@@ -30,12 +30,13 @@ export class OuthService {
                     subject: userId,
                     audience: ["http://localhost/"],
                     expiresIn: 60 * 24 * 24,
-                }
+                },
+                
             );
-
             return token;
         };
 
         console.log(getSignedToken());
+        return getSignedToken();
     }
 }

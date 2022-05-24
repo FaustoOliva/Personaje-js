@@ -107,20 +107,26 @@ export class PersonajeService {
         return response.recordset;
     }
 
-    getDetallesPersonaje = async () => {
+    getDetallesPersonaje = async (id) => {
         console.log('This is a function on the service');
 
-        let response;
+        let personaje;
+        let serie;
 
         const pool = await sql.connect(config);
-        response = await pool.request()
-            .query(`Select * FROM ${personajeTabla}`);
+        personaje = await pool.request()
+            .input('id', sql.Int, id)
+            .query(`Select * FROM ${personajeTabla} where id = @id`);
+        console.log(personaje)
 
-        response =  await pool.request()
-            .query(`select s.id, s.imagen, s.titulo, s.fechaDeCreacion, s.calificacion from ${serieTabla} s inner join ${intermedia} on s.id = ${intermedia}.idS inner join ${personajeTabla} on ${personajeTabla}.id = ${intermedia}.idP `);
-        console.log(response)
+        serie = await pool.request()
+            .input('id', sql.Int, id)
+            .query(`select s.id, s.imagen, s.titulo, s.fechaDeCreacion, s.calificacion from ${serieTabla} s inner join ${intermedia} on s.id = ${intermedia}.idS inner join ${personajeTabla} on ${personajeTabla}.id = ${intermedia}.idP AND ${personajeTabla}.id = @id`);
+        console.log(serie)
 
-        return response.recordset;
+        personaje.recordset[0].seriesAsociadas = serie.recordset;
+
+        return personaje.recordset;
 
 
     }

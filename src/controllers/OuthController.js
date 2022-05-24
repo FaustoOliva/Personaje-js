@@ -5,12 +5,13 @@ import "dotenv/config";
 const router = Router();
 const outhService = new OuthService();
 
-router.get('/login', async res => {
+router.get('/login', async (req, res) => {
     console.log(`This is a get operation`);
 
     const token = await outhService.getToken();
-
-    return res.status(201).json(token); //No reconoce function
+    console.log(`This ` + token);
+    
+    return res.status(200).json(token); //No reconoce function
 });
 
 

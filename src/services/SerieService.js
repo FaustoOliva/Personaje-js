@@ -52,7 +52,7 @@ export class SerieService {
     }
 
     getListSerie = async () => {
-        console.log('This is a function on the service');   
+        console.log('This is a function on the service');
 
         const pool = await sql.connect(config);
         const response = await pool.request()
@@ -63,28 +63,56 @@ export class SerieService {
     }
 
     getSerieById = async (id) => {
-        console.log('This is a function on the service')    
-    
+        console.log('This is a function on the service')
+
         const pool = await sql.connect(config);
         const response = await pool.request()
             .input('id', sql.Int, id)
             .query(`SELECT * from ${serieTabla} where id = @id`);
         console.log(response)
-    
+
         return response.recordset[0];
     }
 
-    getDetallesPersonaje = async () => {
+    getDetallesSerie = async (id) => {
         console.log('This is a function on the service');
 
-        let response;
+        let serie;
+        let personaje;
 
         const pool = await sql.connect(config);
-        response = await pool.request()
-            .query(`Select * FROM ${serieTabla}`);
+        serie = await pool.request()
+            .input('id', sql.Int, id)
+            .query(`Select * FROM ${serieTabla} where id = @id`);
 
-        response = await pool.request()
-            .query(`select p.id, p.imagen, p.nombre, p.peso, p.historia from ${personajeTabla} p inner join ${intermedia} on p.id = ${intermedia}.idP inner join ${serieTabla} on ${serieTabla}.id = ${intermedia}.idS `);
+        personaje = await pool.request()
+            .input('id', sql.Int, id)
+            .query(`select p.id, p.imagen, p.nombre, p.peso, p.historia from ${personajeTabla} p inner join ${intermedia} on p.id = ${intermedia}.idP inner join ${serieTabla} on ${serieTabla}.id = ${intermedia}.idS and  ${serieTabla}.id = @id`);
+        console.log(personaje)
+
+        serie.recordset[0].personajesAsociados = personaje.recordset;
+
+
+        return serie.recordset;
+    }
+
+    getOrdenTitulo = async (titulo, orden) => {
+        console.log('This is a function on the service');
+
+        const pool = await sql.connect(config);
+        let response;
+        if (titulo) {
+            response = await pool.request()
+                .input('Titulo', sql.VarChar, titulo)
+                .query(`SELECT * from ${serieTabla} where titulo = @titulo`);
+        } else if (orden == "ASC") {
+            response = await pool.request()
+                .query(`SELECT * from ${serieTabla} ORDER BY fechaDeCreacion ASC`);
+        } else if (orden == "DESC"){
+            response = await pool.request()
+                .query(`SELECT * from ${serieTabla} ORDER BY fechaDeCreacion DESC`);
+        } 
+
         console.log(response)
 
         return response.recordset;
