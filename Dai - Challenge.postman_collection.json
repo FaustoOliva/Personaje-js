@@ -1,0 +1,457 @@
+{
+	"info": {
+		"_postman_id": "3d8671d8-d162-41da-97d6-8a4b74f24bc4",
+		"name": "Dai - Challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "login",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Url}}/auth/login",
+					"host": [
+						"{{Url}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listado Personajes",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjoiY3VzdG9tIHBheWxvYWQiLCJ1c2VyRW1haWwiOiI2WEJyMm9hT2gwNHg4aUg2N3lAZXhhbXBsZS5jb20iLCJpYXQiOjE2NTM5OTU2MTMsImV4cCI6MTY1NDAzMDE3MywiYXVkIjpbImh0dHA6Ly9sb2NhbGhvc3QvIl0sImlzcyI6Imh0dHA6Ly9wZXJzb25hamUub3J0LyIsInN1YiI6IjZYQnIyb2FPaDA0eDhpSDY3eSJ9.HNPw4P951-Fu6NePjOATOmaIVD3TJXmwTrW6oaOLDcY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Url}}/personaje/characters",
+					"host": [
+						"{{Url}}"
+					],
+					"path": [
+						"personaje",
+						"characters"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Personaje",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjoiY3VzdG9tIHBheWxvYWQiLCJ1c2VyRW1haWwiOiI2WEJyMm9hT2gwNHg4aUg2N3lAZXhhbXBsZS5jb20iLCJpYXQiOjE2NTM5OTU2MTMsImV4cCI6MTY1NDAzMDE3MywiYXVkIjpbImh0dHA6Ly9sb2NhbGhvc3QvIl0sImlzcyI6Imh0dHA6Ly9wZXJzb25hamUub3J0LyIsInN1YiI6IjZYQnIyb2FPaDA0eDhpSDY3eSJ9.HNPw4P951-Fu6NePjOATOmaIVD3TJXmwTrW6oaOLDcY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"imagen\": \"Jxxka.pjg\",\r\n    \"nombre\": \"Jeyx\",\r\n    \"edad\":\"54\",\r\n    \"peso\":\"150\",\r\n    \"historia\":\"Este personaje es muy reconocido por su obesidad \"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Url}}/personaje/create",
+					"host": [
+						"{{Url}}"
+					],
+					"path": [
+						"personaje",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Personaje",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjoiY3VzdG9tIHBheWxvYWQiLCJ1c2VyRW1haWwiOiI2WEJyMm9hT2gwNHg4aUg2N3lAZXhhbXBsZS5jb20iLCJpYXQiOjE2NTM5OTU2MTMsImV4cCI6MTY1NDAzMDE3MywiYXVkIjpbImh0dHA6Ly9sb2NhbGhvc3QvIl0sImlzcyI6Imh0dHA6Ly9wZXJzb25hamUub3J0LyIsInN1YiI6IjZYQnIyb2FPaDA0eDhpSDY3eSJ9.HNPw4P951-Fu6NePjOATOmaIVD3TJXmwTrW6oaOLDcY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"imagen\": \"\",\r\n    \"nombre\": \"\",\r\n    \"edad\":\"\",\r\n    \"peso\":\"\",\r\n    \"historia\":\" \"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Url}}/personaje/:id",
+					"host": [
+						"{{Url}}"
+					],
+					"path": [
+						"personaje",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Personaje",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjoiY3VzdG9tIHBheWxvYWQiLCJ1c2VyRW1haWwiOiI2WEJyMm9hT2gwNHg4aUg2N3lAZXhhbXBsZS5jb20iLCJpYXQiOjE2NTM5OTU2MTMsImV4cCI6MTY1NDAzMDE3MywiYXVkIjpbImh0dHA6Ly9sb2NhbGhvc3QvIl0sImlzcyI6Imh0dHA6Ly9wZXJzb25hamUub3J0LyIsInN1YiI6IjZYQnIyb2FPaDA0eDhpSDY3eSJ9.HNPw4P951-Fu6NePjOATOmaIVD3TJXmwTrW6oaOLDcY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{Url}}/personaje/:id",
+					"host": [
+						"{{Url}}"
+					],
+					"path": [
+						"personaje",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "6"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Detalle Personaje",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjoiY3VzdG9tIHBheWxvYWQiLCJ1c2VyRW1haWwiOiI2WEJyMm9hT2gwNHg4aUg2N3lAZXhhbXBsZS5jb20iLCJpYXQiOjE2NTM5OTU2MTMsImV4cCI6MTY1NDAzMDE3MywiYXVkIjpbImh0dHA6Ly9sb2NhbGhvc3QvIl0sImlzcyI6Imh0dHA6Ly9wZXJzb25hamUub3J0LyIsInN1YiI6IjZYQnIyb2FPaDA0eDhpSDY3eSJ9.HNPw4P951-Fu6NePjOATOmaIVD3TJXmwTrW6oaOLDcY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Url}}/personaje/detalles?id=2",
+					"host": [
+						"{{Url}}"
+					],
+					"path": [
+						"personaje",
+						"detalles"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Busqueda Personaje",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjoiY3VzdG9tIHBheWxvYWQiLCJ1c2VyRW1haWwiOiI2WEJyMm9hT2gwNHg4aUg2N3lAZXhhbXBsZS5jb20iLCJpYXQiOjE2NTM5OTU2MTMsImV4cCI6MTY1NDAzMDE3MywiYXVkIjpbImh0dHA6Ly9sb2NhbGhvc3QvIl0sImlzcyI6Imh0dHA6Ly9wZXJzb25hamUub3J0LyIsInN1YiI6IjZYQnIyb2FPaDA0eDhpSDY3eSJ9.HNPw4P951-Fu6NePjOATOmaIVD3TJXmwTrW6oaOLDcY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Url}}/personaje",
+					"host": [
+						"{{Url}}"
+					],
+					"path": [
+						"personaje"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listado Series",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjoiY3VzdG9tIHBheWxvYWQiLCJ1c2VyRW1haWwiOiI2WEJyMm9hT2gwNHg4aUg2N3lAZXhhbXBsZS5jb20iLCJpYXQiOjE2NTM5OTU2MTMsImV4cCI6MTY1NDAzMDE3MywiYXVkIjpbImh0dHA6Ly9sb2NhbGhvc3QvIl0sImlzcyI6Imh0dHA6Ly9wZXJzb25hamUub3J0LyIsInN1YiI6IjZYQnIyb2FPaDA0eDhpSDY3eSJ9.HNPw4P951-Fu6NePjOATOmaIVD3TJXmwTrW6oaOLDcY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Url}}/serie/movies",
+					"host": [
+						"{{Url}}"
+					],
+					"path": [
+						"serie",
+						"movies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Detalles Serie",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjoiY3VzdG9tIHBheWxvYWQiLCJ1c2VyRW1haWwiOiI2WEJyMm9hT2gwNHg4aUg2N3lAZXhhbXBsZS5jb20iLCJpYXQiOjE2NTM5OTU2MTMsImV4cCI6MTY1NDAzMDE3MywiYXVkIjpbImh0dHA6Ly9sb2NhbGhvc3QvIl0sImlzcyI6Imh0dHA6Ly9wZXJzb25hamUub3J0LyIsInN1YiI6IjZYQnIyb2FPaDA0eDhpSDY3eSJ9.HNPw4P951-Fu6NePjOATOmaIVD3TJXmwTrW6oaOLDcY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Url}}/serie/detalles?id=",
+					"host": [
+						"{{Url}}"
+					],
+					"path": [
+						"serie",
+						"detalles"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Serie",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjoiY3VzdG9tIHBheWxvYWQiLCJ1c2VyRW1haWwiOiI2WEJyMm9hT2gwNHg4aUg2N3lAZXhhbXBsZS5jb20iLCJpYXQiOjE2NTM5OTU2MTMsImV4cCI6MTY1NDAzMDE3MywiYXVkIjpbImh0dHA6Ly9sb2NhbGhvc3QvIl0sImlzcyI6Imh0dHA6Ly9wZXJzb25hamUub3J0LyIsInN1YiI6IjZYQnIyb2FPaDA0eDhpSDY3eSJ9.HNPw4P951-Fu6NePjOATOmaIVD3TJXmwTrW6oaOLDcY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"imagen\":\"\",\r\n    \"titulo\":\"\",\r\n    \"fechaDeCreacion\":\"1999-07-11\",\r\n    \"calificacion\":\"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Url}}/serie/create",
+					"host": [
+						"{{Url}}"
+					],
+					"path": [
+						"serie",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Serie",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjoiY3VzdG9tIHBheWxvYWQiLCJ1c2VyRW1haWwiOiI2WEJyMm9hT2gwNHg4aUg2N3lAZXhhbXBsZS5jb20iLCJpYXQiOjE2NTM5OTU2MTMsImV4cCI6MTY1NDAzMDE3MywiYXVkIjpbImh0dHA6Ly9sb2NhbGhvc3QvIl0sImlzcyI6Imh0dHA6Ly9wZXJzb25hamUub3J0LyIsInN1YiI6IjZYQnIyb2FPaDA0eDhpSDY3eSJ9.HNPw4P951-Fu6NePjOATOmaIVD3TJXmwTrW6oaOLDcY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"imagen\":\"\",\r\n    \"titulo\":\"\",\r\n    \"fechaDeCreacion\":\"1999-07-11\",\r\n    \"calificacion\":\"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Url}}/serie/:id",
+					"host": [
+						"{{Url}}"
+					],
+					"path": [
+						"serie",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "7"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Serie",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjoiY3VzdG9tIHBheWxvYWQiLCJ1c2VyRW1haWwiOiI2WEJyMm9hT2gwNHg4aUg2N3lAZXhhbXBsZS5jb20iLCJpYXQiOjE2NTM5OTU2MTMsImV4cCI6MTY1NDAzMDE3MywiYXVkIjpbImh0dHA6Ly9sb2NhbGhvc3QvIl0sImlzcyI6Imh0dHA6Ly9wZXJzb25hamUub3J0LyIsInN1YiI6IjZYQnIyb2FPaDA0eDhpSDY3eSJ9.HNPw4P951-Fu6NePjOATOmaIVD3TJXmwTrW6oaOLDcY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{Url}}/serie/:id",
+					"host": [
+						"{{Url}}"
+					],
+					"path": [
+						"serie",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "7"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Busqueda orden/name",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjoiY3VzdG9tIHBheWxvYWQiLCJ1c2VyRW1haWwiOiI2WEJyMm9hT2gwNHg4aUg2N3lAZXhhbXBsZS5jb20iLCJpYXQiOjE2NTM5OTU2MTMsImV4cCI6MTY1NDAzMDE3MywiYXVkIjpbImh0dHA6Ly9sb2NhbGhvc3QvIl0sImlzcyI6Imh0dHA6Ly9wZXJzb25hamUub3J0LyIsInN1YiI6IjZYQnIyb2FPaDA0eDhpSDY3eSJ9.HNPw4P951-Fu6NePjOATOmaIVD3TJXmwTrW6oaOLDcY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Url}}/serie/filtrar?titulo=&orden=",
+					"host": [
+						"{{Url}}"
+					],
+					"path": [
+						"serie",
+						"filtrar"
+					],
+					"query": [
+						{
+							"key": "titulo",
+							"value": ""
+						},
+						{
+							"key": "orden",
+							"value": "",
+							"description": "ASC ó DESC"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

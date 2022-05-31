@@ -65,6 +65,8 @@ export class PersonajeService {
     createPersonaje = async (Personaje) => {
         console.log('This is a function on the service');
         console.log(Personaje)
+        const text_exito="Se ha creado con exito.";
+        
         const pool = await sql.connect(config);
         const response = await pool.request()
             .input('Imagen', sql.VarChar, Personaje?.imagen ?? '')
@@ -75,12 +77,14 @@ export class PersonajeService {
             .query(`INSERT INTO ${personajeTabla}(Imagen, Nombre, Edad, Peso, Historia) VALUES (@Imagen, @Nombre, @Edad, @Peso, @Historia)`);
         console.log(response)
 
-        return response.recordset;
+        return text_exito;
     }
 
     updatePersonajeById = async (id, personaje) => {
         console.log('This is a function on the service');
         console.log(id, personaje)
+        const text_exito = "Se ha actualizado con exito."
+       
         const pool = await sql.connect(config);
         const response = await pool.request()
             .input('id', sql.Int, id ?? '')
@@ -92,11 +96,12 @@ export class PersonajeService {
             .query(`UPDATE ${personajeTabla} SET Imagen = @Imagen, Nombre = @Nombre, Edad = @Edad, Peso = @Peso, Historia = @Historia WHERE id = @id`);
         console.log(response)
 
-        return response.recordset;
+        return text_exito;
     }
 
     deletePersonajeById = async (id) => {
         console.log('This is a function on the service');
+        const text_exito = "Se ha borrado con exito."
 
         const pool = await sql.connect(config);
         const response = await pool.request()
@@ -104,7 +109,7 @@ export class PersonajeService {
             .query(`DELETE FROM ${personajeTabla} WHERE id = @id`);
         console.log(response)
 
-        return response.recordset;
+        return text_exito;
     }
 
     getDetallesPersonaje = async (id) => {
