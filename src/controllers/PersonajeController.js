@@ -34,23 +34,17 @@ router.delete('/:id', Authenticate, async (req, res) => {
 router.get('/get', Authenticate, async (req, res) => {
   console.log("nombre: ", req.query.nombre);
   console.log("edad: ", req.query.edad);
+  console.log("peso: ", req.query.peso);
+  console.log("serie: ", req.query.serie);
   console.log(`This is a get operation`);
 
-  const {nombre, edad} = req.query;
+  const {nombre, edad, peso, serie} = req.query;
 
-  const personajes = await personajeService.getPersonaje(nombre, edad);
+  const personajes = await personajeService.getPersonajeFiltrado(nombre, edad, peso, serie);
 
   return res.status(200).json(personajes);
 });
 
-router.get('/getById', Authenticate, async (req, res) => {
-  console.log(`Request URL Param: ${req.query.id}`);
-  console.log(`This is a get operation`);
-
-  const personaje = await personajeService.getPersonajeById(req.query.id);
-
-  return res.status(200).json(personaje);
-});
 
 router.get('/characters', Authenticate, async (req, res) => {
   console.log(`This is a get operation`);

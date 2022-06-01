@@ -9,46 +9,33 @@ const intermedia = process.env.DB_TABLA_PERSOBAJEXSERIE
 
 export class PersonajeService {
 
-    getPersonaje = async (nombre, edad) => {
+    getPersonajeFiltrado = async (nombre, edad, peso, serie) => {
         console.log('This is a function on the service');
-
-        const pool = await sql.connect(config);
+        console.log(nombre)
+        let query = `SELECT p.id, p.Imagen, p.Nombre FROM ${personajeTabla} p, ${intermedia} WHERE p.id = ${intermedia}.idP `
+        
         let response;
-        if (nombre && edad) {
-            response = await pool.request()
-                .input('Nombre', sql.VarChar, nombre)
-                .input('Edad', sql.VarChar, edad)
-                .query(`SELECT * from ${personajeTabla} where nombre = @nombre and edad = @edad`);
-        } else if (nombre && !edad) {
-            response = await pool.request()
-                .input('Nombre', sql.VarChar, nombre)
-                .query(`SELECT * from ${personajeTabla} where nombre = @nombre`);
-        } else if (!nombre && edad) {
-            response = await pool.request()
-                .input('Edad', sql.VarChar, edad)
-                .query(`SELECT * from ${personajeTabla} where edad = @edad`);
-        } else {
-            response = await pool.request()
-                .query(`SELECT * from ${personajeTabla}`);
+        if (nombre) {
+            query += `AND p.Nombre = @nombre`;
+        } if (edad) {
+            query += `AND p.Edad = @edad`;
+        } if (peso) {
+            query += `AND p.Peso = @peso`;
+        } if (serie) {
+            query += `AND ${intermedia}.idS = @serie`;
         }
-
+        console.log(query)
+        const pool = await sql.connect(config);
+        response = await pool.request()
+            .input('nombre', sql.VarChar, nombre)
+            .input('Edad', sql.VarChar, edad)
+            .input('Peso', sql.VarChar, peso)
+            .input('Serie', sql.Int, serie)
+            .query(query);
+            console.log(query)
         console.log(response)
 
         return response.recordset;
-    }
-
-    getPersonajeById = async (id) => {
-        console.log('This is a function on the service');
-
-        //const SP_GETID = "SELECT * from ${personajeTabla} where id = @id"
-
-        const pool = await sql.connect(config);
-        const response = await pool.request()
-            .input('id', sql.Int, id)
-            .query(`SELECT * from ${personajeTabla} where id = @id`);
-        console.log(response)
-
-        return response.recordset[0];
     }
 
     getListPersonaje = async () => {
@@ -65,8 +52,8 @@ export class PersonajeService {
     createPersonaje = async (Personaje) => {
         console.log('This is a function on the service');
         console.log(Personaje)
-        const text_exito="Se ha creado con exito.";
-        
+        const text_exito = "Se ha creado con exito.";
+
         const pool = await sql.connect(config);
         const response = await pool.request()
             .input('Imagen', sql.VarChar, Personaje?.imagen ?? '')
@@ -84,7 +71,7 @@ export class PersonajeService {
         console.log('This is a function on the service');
         console.log(id, personaje)
         const text_exito = "Se ha actualizado con exito."
-       
+
         const pool = await sql.connect(config);
         const response = await pool.request()
             .input('id', sql.Int, id ?? '')
