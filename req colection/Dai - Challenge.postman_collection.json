@@ -2,7 +2,8 @@
 	"info": {
 		"_postman_id": "3d8671d8-d162-41da-97d6-8a4b74f24bc4",
 		"name": "Dai - Challenge",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20034226"
 	},
 	"item": [
 		{
@@ -185,7 +186,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjoiY3VzdG9tIHBheWxvYWQiLCJ1c2VyRW1haWwiOiI2WEJyMm9hT2gwNHg4aUg2N3lAZXhhbXBsZS5jb20iLCJpYXQiOjE2NTM5OTU2MTMsImV4cCI6MTY1NDAzMDE3MywiYXVkIjpbImh0dHA6Ly9sb2NhbGhvc3QvIl0sImlzcyI6Imh0dHA6Ly9wZXJzb25hamUub3J0LyIsInN1YiI6IjZYQnIyb2FPaDA0eDhpSDY3eSJ9.HNPw4P951-Fu6NePjOATOmaIVD3TJXmwTrW6oaOLDcY",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjoiY3VzdG9tIHBheWxvYWQiLCJ1c2VyRW1haWwiOiJxWTAyVXRVME5EUzlWQlJJaVpAZXhhbXBsZS5jb20iLCJpYXQiOjE2NTQwODMzNzAsImV4cCI6MTY1NDExNzkzMCwiYXVkIjpbImh0dHA6Ly9sb2NhbGhvc3QvIl0sImlzcyI6Imh0dHA6Ly9wZXJzb25hamUub3J0LyIsInN1YiI6InFZMDJVdFUwTkRTOVZCUklpWiJ9.xEOYRaJf1MBdRRDfSDXLsoeTNyNzLt1HoQYelEvlGsk",
 							"type": "string"
 						}
 					]
@@ -219,7 +220,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjoiY3VzdG9tIHBheWxvYWQiLCJ1c2VyRW1haWwiOiI2WEJyMm9hT2gwNHg4aUg2N3lAZXhhbXBsZS5jb20iLCJpYXQiOjE2NTM5OTU2MTMsImV4cCI6MTY1NDAzMDE3MywiYXVkIjpbImh0dHA6Ly9sb2NhbGhvc3QvIl0sImlzcyI6Imh0dHA6Ly9wZXJzb25hamUub3J0LyIsInN1YiI6IjZYQnIyb2FPaDA0eDhpSDY3eSJ9.HNPw4P951-Fu6NePjOATOmaIVD3TJXmwTrW6oaOLDcY",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjoiY3VzdG9tIHBheWxvYWQiLCJ1c2VyRW1haWwiOiJxWTAyVXRVME5EUzlWQlJJaVpAZXhhbXBsZS5jb20iLCJpYXQiOjE2NTQwODMzNzAsImV4cCI6MTY1NDExNzkzMCwiYXVkIjpbImh0dHA6Ly9sb2NhbGhvc3QvIl0sImlzcyI6Imh0dHA6Ly9wZXJzb25hamUub3J0LyIsInN1YiI6InFZMDJVdFUwTkRTOVZCUklpWiJ9.xEOYRaJf1MBdRRDfSDXLsoeTNyNzLt1HoQYelEvlGsk",
 							"type": "string"
 						}
 					]
@@ -227,12 +228,31 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{Url}}/personaje",
+					"raw": "{{Url}}/personaje/get?nombre=&edad=&peso=&serie=",
 					"host": [
 						"{{Url}}"
 					],
 					"path": [
-						"personaje"
+						"personaje",
+						"get"
+					],
+					"query": [
+						{
+							"key": "nombre",
+							"value": ""
+						},
+						{
+							"key": "edad",
+							"value": ""
+						},
+						{
+							"key": "peso",
+							"value": ""
+						},
+						{
+							"key": "serie",
+							"value": ""
+						}
 					]
 				}
 			},
