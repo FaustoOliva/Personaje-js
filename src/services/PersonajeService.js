@@ -1,6 +1,7 @@
 import sql from 'mssql'
 import config from '../../db.js'
 import 'dotenv/config'
+import { text } from 'express';
 
 const personajeTabla = process.env.DB_TABLA_PERSONAJE;
 const serieTabla = process.env.DB_TABLA_Serie;
@@ -16,26 +17,33 @@ export class PersonajeService {
         
         let response;
         if (nombre) {
-            query += `AND p.Nombre = @nombre`;
+            query += ` AND p.Nombre = @nombre`;
         } if (edad) {
-            query += `AND p.Edad = @edad`;
+            query += ` AND p.Edad = @edad`;
         } if (peso) {
-            query += `AND p.Peso = @peso`;
+            query += ` AND p.Peso = @peso`;
         } if (serie) {
-            query += `AND ${intermedia}.idS = @serie`;
+            query += ` AND ${intermedia}.idS = @serie`;
         }
         console.log(query)
         const pool = await sql.connect(config);
         response = await pool.request()
             .input('nombre', sql.VarChar, nombre)
-            .input('Edad', sql.VarChar, edad)
-            .input('Peso', sql.VarChar, peso)
-            .input('Serie', sql.Int, serie)
+            .input('edad', sql.VarChar, edad)
+            .input('peso', sql.VarChar, peso)
+            .input('serie', sql.Int, serie)
             .query(query);
             console.log(query)
         console.log(response)
 
-        return response.recordset;
+        if (response.recordset.length==0){
+            let text='No hay ningun personaje que coincida con la busqueda'
+            return text;
+        }else{
+            return response.recordset;
+
+        }
+
     }
 
     getListPersonaje = async () => {
