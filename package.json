@@ -17,6 +17,8 @@
     "msnodesqlv8": "^2.4.7",
     "mssql": "^8.1.0",
     "passport": "^0.5.2",
-    "passport-jwt": "^4.0.0"
+    "passport-jwt": "^4.0.0",
+    "swagger-jsdoc": "^6.2.1",
+    "swagger-ui-express": "^4.4.0"
   }
 }
