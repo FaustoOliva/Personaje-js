@@ -11,12 +11,12 @@ const port = 5000;
 
 app.use(cors());
 app.use(express.json());
-const specs = swaggerJsDoc(options);
+//const specs = swaggerJsDoc(options);
 
 app.use("/personaje", PersonajeRouter);
 app.use("/serie", SerieRouter);
 app.use("/auth", OuthRouter);
-app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
+//app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);

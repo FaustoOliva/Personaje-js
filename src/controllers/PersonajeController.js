@@ -1,9 +1,11 @@
 import { Router } from 'express';
 import { PersonajeService } from '../services/PersonajeService.js';
 import { Authenticate } from '../common/jwt.strategy.js'; 
+import { getPersonaje } from '../ClientAxios.js';
 
 const router = Router();
 const personajeService = new PersonajeService();
+
 
 router.post('/create', Authenticate, async (req, res) => {
   console.log(`This is a post operation`);
@@ -46,7 +48,7 @@ router.get('/get', Authenticate, async (req, res) => {
 });
 
 
-router.get('/characters', Authenticate, async (req, res) => {
+router.get('/characters', async (req, res) => {
   console.log(`This is a get operation`);
 
   const personajes = await personajeService.getListPersonaje();
@@ -62,5 +64,16 @@ router.get('/detalles', Authenticate, async (req, res) => {
   
   return res.status(200).json(personajes);
 });
+
+router.get('/Axios/characters', async (req, res) => {
+  console.log(`Request URL Param: Axios`);
+  console.log(`This is a get operation`);
+
+  const personajes = await getPersonaje();
+  
+  return res.status(200).json(personajes);
+});
+
+
 
 export default router;
